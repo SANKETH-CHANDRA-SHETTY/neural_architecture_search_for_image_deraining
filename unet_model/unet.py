@@ -1,3 +1,5 @@
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 class UNet(nn.Module):
     def __init__(self, encoded_list, n_channels, out_channels):
         super(UNet, self).__init__()
