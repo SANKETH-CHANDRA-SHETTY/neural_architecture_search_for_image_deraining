@@ -18,12 +18,7 @@ class HINeth(nn.Module):
                 self.isOk = False
 
     def validate_and_adjust_params(self, dummy1, dummy2, num_blocks, dummy3, activation):
-        # Validate num_blocks
-        if not (2 <= num_blocks <= 6):
-            return False, None, None, None, None, None
-
-        # Validate and adjust activation
-        if activation not in [0, 1]:
+        if not (2 <= num_blocks <= 6) or activation not in [0, 1]:
             return False, None, None, None, None, None
 
         activation = 'leaky_relu' if activation == 0 else 'relu'

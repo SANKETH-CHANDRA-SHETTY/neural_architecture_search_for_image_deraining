@@ -19,19 +19,7 @@ class Restormerh(nn.Module):
                 self.isOk = False
 
     def validate_and_adjust_params(self, dim, heads, num_blocks, ffn_expansion_factor, LayerNorm_type):
-        if not (4 <= dim <= 128):
-            return False, None, None, None, None, None
-
-        if not (1 <= heads <= 8):
-            return False, None, None, None, None, None
-
-        if not (2 <= num_blocks <= 6):
-            return False, None, None, None, None, None
-
-        if not (2 <= ffn_expansion_factor <= 6):
-            return False, None, None, None, None, None
-
-        if LayerNorm_type not in [0, 1]:
+        if not (4 <= dim <= 128) or not (1 <= heads <= 8) or not (2 <= num_blocks <= 6) or not (2 <= ffn_expansion_factor <= 6) or LayerNorm_type not in [0, 1]:
             return False, None, None, None, None, None
 
         LayerNorm_type = 'BiasFree' if LayerNorm_type == 0 else 'WithBias'

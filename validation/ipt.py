@@ -3,7 +3,7 @@ class ipth(nn.Module):
         super(ipth, self).__init__()
 
         self.isOk = True
-        self.model = None
+        self.block = None
         self.patch_size = 8  
 
         is_valid, num_queries, patch_dim, num_heads, num_layers, dropout_rate = self.validate_and_adjust_params(
@@ -14,7 +14,7 @@ class ipth(nn.Module):
             self.isOk = False
         else:
             try:
-                self.model = ipt(num_queries, patch_dim, num_heads, num_layers, dropout_rate)  # Fixed: Sending only 5 arguments
+                self.block = ipt(num_queries, patch_dim, num_heads, num_layers, dropout_rate)  
             except Exception as e:
                 self.isOk = False
 
@@ -39,7 +39,4 @@ class ipth(nn.Module):
         return True, num_queries, patch_dim, num_heads, num_layers, dropout_rate  # Removed 'dim' from return
 
     def forward(self, x):
-        if self.isOk and self.model is not None:
-            return self.model(x)
-        else:
-            raise ValueError("Invalid parameters: Model was not initialized")
+        return self.block(x)

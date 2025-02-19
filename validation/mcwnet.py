@@ -17,10 +17,7 @@ class MCWNeth(nn.Module):
                 self.isOk = False
 
     def validate_and_adjust_params(self,d1,d2,d3,sub_sample, bn_layer):
-      if not(0 <= sub_sample <= 1):
-        return False, None, None, None, None, None
-
-      if not(0 <= bn_layer <= 1):
+      if not(0 <= sub_sample <= 1) or not(0 <= bn_layer <= 1):
         return False, None, None, None, None, None
 
       sub_sample=True if sub_sample==1 else False

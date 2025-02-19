@@ -18,13 +18,7 @@ class M3SNeth(nn.Module):
                 self.isOk = False
 
     def validate_and_adjust_params(self, dummy1, DW_Expand, FFN_Expand, dummy2, drop_out_rate):
-        if not (2 <= DW_Expand <= 6):
-            return False, None, None, None, None, None
-
-        if not (2 <= FFN_Expand <= 6):
-            return False, None, None, None, None, None
-
-        if not (0 <= drop_out_rate <= 1):
+        if not (2 <= DW_Expand <= 6) or not (2 <= FFN_Expand <= 6) or not (0 <= drop_out_rate <= 1):
             return False, None, None, None, None, None
 
         return True, dummy1, DW_Expand, FFN_Expand, dummy2, drop_out_rate
